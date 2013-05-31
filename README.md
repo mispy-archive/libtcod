@@ -1,20 +1,10 @@
 # Libtcod
 
-TODO: Write a gem description
+WIP! Currently only likely to work with 64-bit UNIX.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'libtcod'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install libtcod
+    gem install libtcod
 
 ## Usage
 
