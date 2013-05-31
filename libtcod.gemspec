@@ -14,4 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "libtcod"
   gem.require_paths = ["lib"]
   gem.version       = Libtcod::VERSION
+
+  gem.add_development_dependency 'minitest'
+
+  gem.add_runtime_dependency 'ffi'
 end
