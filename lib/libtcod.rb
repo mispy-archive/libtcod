@@ -1,5 +1,7 @@
 require 'ffi'
 require 'libtcod/version'
+require 'libtcod/struct'
+require 'libtcod/consts'
 require 'libtcod/color'
 require 'libtcod/api'
 require 'libtcod/console'
