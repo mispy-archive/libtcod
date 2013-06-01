@@ -598,6 +598,8 @@ module TCOD
   end
 
   TCOD_noise_t = :pointer
+  float_3 = :pointer # float n[3]
+  int_4 = :pointer
 
   tcod_function :TCOD_heightmap_new, [ :int, :int ], :pointer
   tcod_function :TCOD_heightmap_delete, [ :pointer ], :void
@@ -605,7 +607,7 @@ module TCOD
   tcod_function :TCOD_heightmap_get_interpolated_value, [ :pointer, :float, :float ], :float
   tcod_function :TCOD_heightmap_set_value, [ :pointer, :int, :int, :float ], :void
   tcod_function :TCOD_heightmap_get_slope, [ :pointer, :int, :int ], :float
-  #tcod_function :TCOD_heightmap_get_normal, [ :pointer, :float, :float, [:float, 3], :float ], :void
+  tcod_function :TCOD_heightmap_get_normal, [ :pointer, :float, :float, float_3, :float ], :void
   tcod_function :TCOD_heightmap_count_cells, [ :pointer, :float, :float ], :int
   tcod_function :TCOD_heightmap_has_land_on_border, [ :pointer, :float ], :bool
   tcod_function :TCOD_heightmap_get_minmax, [ :pointer, :pointer, :pointer ], :void
@@ -620,7 +622,7 @@ module TCOD
   tcod_function :TCOD_heightmap_multiply_hm, [ :pointer, :pointer, :pointer ], :void
   tcod_function :TCOD_heightmap_add_hill, [ :pointer, :float, :float, :float, :float ], :void
   tcod_function :TCOD_heightmap_dig_hill, [ :pointer, :float, :float, :float, :float ], :void
-  #tcod_function :TCOD_heightmap_dig_bezier, [ :pointer, [:int, 4], [:int, 4], :float, :float, :float, :float ], :void
+  tcod_function :TCOD_heightmap_dig_bezier, [ :pointer, int_4, int_4, :float, :float, :float, :float ], :void
   tcod_function :TCOD_heightmap_rain_erosion, [ :pointer, :int, :float, :float, TCOD_random_t ], :void
   tcod_function :TCOD_heightmap_kernel_transform, [ :pointer, :int, :pointer, :pointer, :pointer, :float, :float ], :void
   tcod_function :TCOD_heightmap_add_voronoi, [ :pointer, :int, :int, :pointer, TCOD_random_t ], :void
