@@ -1,3 +1,3 @@
-module Libtcod
-  VERSION = "0.0.1"
+module TCOD
+  VERSION = "0.0.2"
 end

@@ -9,11 +9,11 @@ module TCOD
     ffi_lib ['libtcod', File.join(APP_ROOT, "clib/i686/libtcod.so")]
   end
 
-  # Remove redundant namespacing from attached functions
+  # Remove redundant namespacing
   def self.tcod_function(sym, *args)
     attach_function(sym[5..-1].to_sym, sym, *args)
   end
-  
+
   ### Color module
   class Color < FFI::Struct
     layout :r, :uchar,
@@ -44,8 +44,6 @@ module TCOD
       "<Color #{self[:r]}, #{self[:g]}, #{self[:b]}>"
     end
   end
-
-  attach_variable :TCOD_black, Color.val
 
   tcod_function :TCOD_color_RGB, [ :uchar, :uchar, :uchar ], Color.val
   tcod_function :TCOD_color_HSV, [ :float, :float, :float ], Color.val
