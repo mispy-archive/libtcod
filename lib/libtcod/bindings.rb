@@ -2,7 +2,12 @@ APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
 module TCOD
   extend FFI::Library
-  ffi_lib File.join(APP_ROOT, "libtcod-1.5.1/libtcod.so")
+
+  if RUBY_PLATFORM.include?('x86_64')
+    ffi_lib ['libtcod', File.join(APP_ROOT, "clib/amd64/libtcod.so")]
+  else
+    ffi_lib ['libtcod', File.join(APP_ROOT, "clib/i686/libtcod.so")]
+  end
 
   # Remove redundant namespacing from attached functions
   def self.tcod_function(sym, *args)
