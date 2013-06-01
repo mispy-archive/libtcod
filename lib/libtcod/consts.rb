@@ -18,6 +18,7 @@ module TCOD
   # non blocking key events types
   KEY_PRESSED = 1
   KEY_RELEASED = 2
+
   # key codes
   KEY_NONE = 0
   KEY_ESCAPE = 1
@@ -85,7 +86,9 @@ module TCOD
   KEY_SCROLLLOCK = 63
   KEY_SPACE = 64
   KEY_CHAR = 65
-  # special chars
+
+  ### special chars
+  
   # single walls
   CHAR_HLINE = 196
   CHAR_VLINE = 179
@@ -98,6 +101,7 @@ module TCOD
   CHAR_TEEN = 193
   CHAR_TEES = 194
   CHAR_CROSS = 197
+
   # double walls
   CHAR_DHLINE = 205
   CHAR_DVLINE = 186
@@ -110,28 +114,34 @@ module TCOD
   CHAR_DTEEN = 202
   CHAR_DTEES = 203
   CHAR_DCROSS = 206
+
   # blocks
   CHAR_BLOCK1 = 176
   CHAR_BLOCK2 = 177
   CHAR_BLOCK3 = 178
+
   # arrows
   CHAR_ARROW_N = 24
   CHAR_ARROW_S = 25
   CHAR_ARROW_E = 26
   CHAR_ARROW_W = 27
+
   # arrows without tail
   CHAR_ARROW2_N = 30
   CHAR_ARROW2_S = 31
   CHAR_ARROW2_E = 16
   CHAR_ARROW2_W = 17
+
   # double arrows
   CHAR_DARROW_H = 29
   CHAR_DARROW_V = 18
+
   # GUI stuff
   CHAR_CHECKBOX_UNSET = 224
   CHAR_CHECKBOX_SET = 225
   CHAR_RADIO_UNSET = 9
   CHAR_RADIO_SET = 10
+
   # sub-pixel resolution kit
   CHAR_SUBP_NW = 226
   CHAR_SUBP_NE = 227
@@ -140,6 +150,7 @@ module TCOD
   CHAR_SUBP_DIAG = 230
   CHAR_SUBP_E = 231
   CHAR_SUBP_SW = 232
+
   # misc characters
   CHAR_BULLET = 7
   CHAR_BULLET_INV = 8
@@ -175,12 +186,14 @@ module TCOD
   CHAR_THREE_QUARTERS = 243
   CHAR_UMLAUT = 249
   CHAR_YEN = 190
+
   # font flags
   FONT_LAYOUT_ASCII_INCOL = 1
   FONT_LAYOUT_ASCII_INROW = 2
   FONT_TYPE_GREYSCALE = 4
   FONT_TYPE_GRAYSCALE = 4
   FONT_LAYOUT_TCOD = 8
+
   # color control codes
   COLCTRL_1=1
   COLCTRL_2=2
@@ -191,11 +204,13 @@ module TCOD
   COLCTRL_FORE_RGB=6
   COLCTRL_BACK_RGB=7
   COLCTRL_STOP=8
+
   # renderers
   RENDERER_GLSL=0
   RENDERER_OPENGL=1
   RENDERER_SDL=2
   NB_RENDERERS=3
+
   # alignment
   LEFT=0
   RIGHT=1
