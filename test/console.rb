@@ -7,6 +7,6 @@ class TestConsole < Minitest::Test
   end
 
   def test_create_game_window
-    TCOD::C.console_init_root(100, 100, "rah", false, :renderer_opengl)
+    TCOD::Console.init_root(100, 100, "rah", false, :renderer_opengl)
   end
 end
