@@ -44,6 +44,24 @@ module TCOD
     def put_char(x, y, c, flag=BKGND_DEFAULT)
       TCOD.console_put_char(@ptr, x, y, c.ord, flag)
     end
+    def set_background_flag(bkgnd_flag)
+      TCOD.console_set_background_flag(@ptr, bkgnd_flag)
+    end
+    def set_alignment(alignment)
+      TCOD.console_set_alignment(@ptr, alignment)
+    end
+    def print(x, y, fmt, *args)
+      TCOD.console_print(@ptr, x, y, fmt, *args)
+    end
+    def print_ex(x, y, bkgnd_flag, alignment, fmt, *args)
+      TCOD.console_print_ex(@ptr, x, y, bkgnd_flag, alignment, fmt, *args)
+    end
+    def print_rect(x, y, w, h, fmt, *args)
+      TCOD.console_print_rect(@ptr, x, y, w, h, fmt, *args)
+    end
+    def print_rect_ex(x, y, w, h, bkgnd_flag, alignment, fmt, *args)
+      TCOD.console_print_rect_ex(@ptr, x, y, w, h, bkgnf_flag, alignment, fmt, *args)
+    end
 
     def flush; TCOD.console_flush; end
 
