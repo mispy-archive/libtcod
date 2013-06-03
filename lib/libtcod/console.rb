@@ -1,12 +1,12 @@
 module TCOD
   class Console
-    attr_accessor :width, :height
+    attr_accessor :width, :height, :ptr
 
     def self.root
       @root ||= TCOD::Console.new(0, 0, true)
     end
 
-    def initialize(w, h, root=False)
+    def initialize(w, h, root=false)
       if root
         @ptr = nil
       else
@@ -44,6 +44,9 @@ module TCOD
     def put_char(x, y, c, flag=BKGND_DEFAULT)
       TCOD.console_put_char(@ptr, x, y, c.ord, flag)
     end
+    def put_char_ex(x, y, c, foreground, background)
+      TCOD.console_put_char_ex(@ptr, x, y, c.ord, foreground, background)
+    end
     def set_background_flag(bkgnd_flag)
       TCOD.console_set_background_flag(@ptr, bkgnd_flag)
     end
@@ -65,7 +68,13 @@ module TCOD
 
     def flush; TCOD.console_flush; end
 
+    def check_for_keypress(flags=TCOD::KEY_PRESSED); TCOD.console_check_for_keypress(flags); end
     def wait_for_keypress(flush=false); TCOD.console_wait_for_keypress(flush); end
     def key_pressed?(keycode); TCOD.console_is_key_pressed(keycode); end
+
+    def blit(src, xSrc, ySrc, wSrc, hSrc, xDst, yDst, foregroundAlpha=1.0, backgroundAlpha=1.0)
+      TCOD.console_blit(src.ptr, xSrc, ySrc, wSrc, hSrc, @ptr, xDst, yDst, foregroundAlpha, backgroundAlpha)
+    end
+
   end
 end
