@@ -1,8 +1,8 @@
-# libtcod-ruby 0.0.2
+# libtcod-ruby 0.0.3
 
 Ruby bindings for [libtcod 1.5.1](http://doryen.eptalys.net/libtcod/)
 
-Currently only tested on Linux; other platforms may work if you have libtcod in a place where ffi\_lib knows to get it. Basic wrapping of the C functions is complete, and a more idiomatic Ruby API is in progress.
+Currently tested on Linux and Windows using Ruby 1.9.3; other platforms may work if you have libtcod in a place where ffi\_lib knows to get it. Basic wrapping of the C functions is complete, and a more idiomatic Ruby API is in progress.
 
 ## Installation
 
