@@ -3,7 +3,9 @@ APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 module TCOD
   extend FFI::Library
 
-  if RUBY_PLATFORM.include?('x86_64')
+  if RUBY_PLATFORM.include?('mingw32')
+    ffi_lib ['libtcod-mingw', File.join(APP_ROOT, "clib/i686/libtcod-mingw.dll").gsub('/', '\\')]
+  elsif RUBY_PLATFORM.include?('x86_64')
     ffi_lib ['libtcod', File.join(APP_ROOT, "clib/amd64/libtcod.so")]
   else
     ffi_lib ['libtcod', File.join(APP_ROOT, "clib/i686/libtcod.so")]
