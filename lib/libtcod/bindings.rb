@@ -77,6 +77,10 @@ module TCOD
            :ralt, :bool,
            :rctrl, :bool,
            :shift, :bool
+
+    def c
+      self[:c].chr
+    end
   end
 
   TCOD_renderer_t = :int
