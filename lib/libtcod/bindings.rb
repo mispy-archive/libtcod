@@ -268,7 +268,7 @@ module TCOD
   tcod_function :TCOD_image_is_pixel_transparent, [ :pointer, :int, :int ], :bool
 
   ### Mouse module
-  class MouseStatus < MethodStruct
+  class Mouse < MethodStruct
     layout(
            :x, :int,
            :y, :int,
@@ -288,11 +288,11 @@ module TCOD
            :wheel_down, :bool
     )
   end
-  attach_function :TCOD_mouse_show_cursor, [ :bool ], :void
-  attach_function :TCOD_mouse_get_status, [  ], MouseStatus
-  attach_function :TCOD_mouse_is_cursor_visible, [  ], :bool
-  attach_function :TCOD_mouse_move, [ :int, :int ], :void
-  #attach_function :TCOD_mouse_includes_touch, [ :bool ], :void
+  tcod_function :TCOD_mouse_show_cursor, [ :bool ], :void
+  tcod_function :TCOD_mouse_get_status, [  ], Mouse
+  tcod_function :TCOD_mouse_is_cursor_visible, [  ], :bool
+  tcod_function :TCOD_mouse_move, [ :int, :int ], :void
+  #tcod_function :TCOD_mouse_includes_touch, [ :bool ], :void
 
   ### Parser module
   TYPE_NONE = 0

@@ -14,6 +14,8 @@ module TCOD
         @height = w
         @ptr = TCOD.console_new(w, h)
       end
+
+      ObjectSpace.define_finalizer(self, self.class.finalize(ptr))
     end
 
     def init_root(width, height, title, fullscreen=false, renderer=RENDERER_SDL)
@@ -40,6 +42,14 @@ module TCOD
     def set_default_background(color); TCOD.console_set_default_background(@ptr, color); end
     def set_default_foreground(color); TCOD.console_set_default_foreground(@ptr, color); end
     def clear; TCOD.console_clear(@ptr); end
+
+    def set_char_background(x, y, col, flag=TCOD::BKGND_SET)
+      TCOD.console_set_char_background(@ptr, x, y, col, flag)
+    end
+
+    def set_char_foreground(x, y, col)
+      TCOD.console_set_char_foreground(@ptr, x, y, col)
+    end
 
     def put_char(x, y, c, flag=BKGND_DEFAULT)
       TCOD.console_put_char(@ptr, x, y, c.ord, flag)
@@ -76,5 +86,8 @@ module TCOD
       TCOD.console_blit(src.ptr, xSrc, ySrc, wSrc, hSrc, @ptr, xDst, yDst, foregroundAlpha, backgroundAlpha)
     end
 
+    def self.finalize(ptr)
+      proc { TCOD.console_delete(ptr) }
+    end
   end
 end

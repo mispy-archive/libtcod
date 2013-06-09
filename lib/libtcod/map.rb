@@ -3,7 +3,11 @@ module TCOD
     attr_reader :ptr
 
     def initialize(width, height)
+      @width = width
+      @height = height
       @ptr = TCOD.map_new(width, height)
+
+      ObjectSpace.define_finalizer(self, self.class.finalize(ptr))
     end
 
     def set_properties(x, y, is_transparent, is_walkable)
@@ -13,18 +17,38 @@ module TCOD
     def compute_fov(x, y, max_radius, light_walls, algo)
       TCOD.map_compute_fov(@ptr, x, y, max_radius, light_walls, algo)
     end
+
+    def in_fov?(x, y)
+      TCOD.map_is_in_fov(@ptr, x, y)
+    end
+
+    def clone
+      map = Map.new(@width, @height)
+      TCOD.map_copy(@ptr, map.ptr)
+      map
+    end
+
+    def self.finalize(ptr)
+      proc { TCOD.map_delete(ptr) }
+    end
   end
 
   class Path
     attr_reader :ptr
 
-    def self.using_map(tcod_map, diagonalCost=1.41)
+    def self.by_map(tcod_map, diagonalCost=1.41)
       Path.new TCOD.path_new_using_map(tcod_map.ptr, diagonalCost)
+    end
+
+    def self.by_callback(width, height, user_data=nil, diagonalCost=1.41, &b)
+      Path.new TCOD.path_new_using_function(width, height, b, user_data, diagonalCost)
     end
 
     # Generally shouldn't be called directly
     def initialize(ptr)
       @ptr = ptr
+
+      ObjectSpace.define_finalizer(self, self.class.finalize(ptr))
     end
 
     # Compute a path between two points
@@ -72,6 +96,13 @@ module TCOD
 
     def self.finalize(ptr)
       proc { TCOD.path_delete(ptr) }
+    end
+
+    # Custom additions
+    def each(&b)
+      0.upto(self.size-1) do |i|
+        yield self[i]
+      end
     end
   end
 end
