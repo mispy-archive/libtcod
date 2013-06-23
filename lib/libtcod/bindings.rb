@@ -5,12 +5,18 @@ module TCOD
 
   if RUBY_PLATFORM.include?('mingw32')
     ffi_lib ['libtcod-mingw', File.join(APP_ROOT, "clib/i686/libtcod-mingw.dll").gsub('/', '\\')]
-  elsif RUBY_PLATFORM.include?('darwin')
-    ffi_lib ['libtcod', File.join(APP_ROOT, "clib/amd64/libtcod.dylib")]
   elsif RUBY_PLATFORM.include?('x86_64')
-    ffi_lib ['libtcod', File.join(APP_ROOT, "clib/amd64/libtcod.so")]
+    if RUBY_PLATFORM.include?('darwin')
+      ffi_lib ['libtcod', File.join(APP_ROOT, "clib/amd64/libtcod.dylib")]
+    else
+      ffi_lib ['libtcod', File.join(APP_ROOT, "clib/amd64/libtcod.so")]
+    end
   else
-    ffi_lib ['libtcod', File.join(APP_ROOT, "clib/i686/libtcod.so")]
+    if RUBY_PLATFORM.include?('darwin')
+      ffi_lib ['libtcod', File.join(APP_ROOT, "clib/i686/libtcod.dylib")]
+    else
+      ffi_lib ['libtcod', File.join(APP_ROOT, "clib/i686/libtcod.so")]
+    end
   end
 
   # Remove redundant namespacing
