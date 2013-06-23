@@ -37,12 +37,14 @@ end
 # Initialization & Main Loop
 #############################################
  
-TCOD.console_set_custom_font('arial10x10.png', TCOD::FONT_TYPE_GREYSCALE | TCOD::FONT_LAYOUT_TCOD, 0, 0)
+TCOD.console_set_custom_font('./arial10x10.png', TCOD::FONT_TYPE_GREYSCALE | TCOD::FONT_LAYOUT_TCOD, 0, 0)
 TCOD.console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, 'ruby/TCOD tutorial', false, TCOD::RENDERER_SDL)
 TCOD.sys_set_fps(LIMIT_FPS)
  
 $playerx = SCREEN_WIDTH/2
 $playery = SCREEN_HEIGHT/2
+
+trap('SIGINT') { exit! }
  
 until TCOD.console_is_window_closed
   TCOD.console_set_default_foreground(nil, TCOD::Color::WHITE)
