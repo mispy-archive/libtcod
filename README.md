@@ -1,4 +1,4 @@
-# libtcod-ruby 0.0.3
+# libtcod-ruby 0.0.4
 
 Ruby bindings for [libtcod 1.5.1](http://doryen.eptalys.net/libtcod/)
 
