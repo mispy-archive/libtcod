@@ -11,7 +11,7 @@ module TCOD
         @ptr = nil
       else
         @width = w
-        @height = w
+        @height = h
         @ptr = TCOD.console_new(w, h)
       end
 
