@@ -17,5 +17,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'minitest'
 
-  gem.add_runtime_dependency 'ffi'
+  gem.add_runtime_dependency 'ffi', '~> 1.9.3'
 end
