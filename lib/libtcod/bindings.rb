@@ -39,7 +39,7 @@ module TCOD
 
     def self.hsv(h,s,v)
       TCOD.color_HSV(h,s,v)
-    end
+     end
 
     def ==(col)
       TCOD.color_equals(self, col)
@@ -235,15 +235,15 @@ module TCOD
   ### Line module
   class BresenhamData < MethodStruct
     layout(
-           :stepx, :int,
-           :stepy, :int,
-           :e, :int,
-           :deltax, :int,
-           :deltay, :int,
-           :origx, :int,
-           :origy, :int,
-           :destx, :int,
-           :desty, :int
+      :stepx, :int,
+      :stepy, :int,
+      :e, :int,
+      :deltax, :int,
+      :deltay, :int,
+      :origx, :int,
+      :origy, :int,
+      :destx, :int,
+      :desty, :int
     )
   end
   callback(:TCOD_line_listener_t, [ :int, :int ], :bool)
@@ -281,26 +281,26 @@ module TCOD
   ### Mouse module
   class Mouse < MethodStruct
     layout(
-           :x, :int,
-           :y, :int,
-           :dx, :int,
-           :dy, :int,
-           :cx, :int,
-           :cy, :int,
-           :dcx, :int,
-           :dcy, :int,
-           :lbutton, :bool,
-           :rbutton, :bool,
-           :mbutton, :bool,
-           :lbutton_pressed, :bool,
-           :rbutton_pressed, :bool,
-           :mbutton_pressed, :bool,
-           :wheel_up, :bool,
-           :wheel_down, :bool
+      :x, :int,
+      :y, :int,
+      :dx, :int,
+      :dy, :int,
+      :cx, :int,
+      :cy, :int,
+      :dcx, :int,
+      :dcy, :int,
+      :lbutton, :bool,
+      :rbutton, :bool,
+      :mbutton, :bool,
+      :lbutton_pressed, :bool,
+      :rbutton_pressed, :bool,
+      :mbutton_pressed, :bool,
+      :wheel_up, :bool,
+      :wheel_down, :bool
     )
   end
   tcod_function :TCOD_mouse_show_cursor, [ :bool ], :void
-  tcod_function :TCOD_mouse_get_status, [  ], Mouse
+  tcod_function :TCOD_mouse_get_status, [  ], Mouse.val
   tcod_function :TCOD_mouse_is_cursor_visible, [  ], :bool
   tcod_function :TCOD_mouse_move, [ :int, :int ], :void
   #tcod_function :TCOD_mouse_includes_touch, [ :bool ], :void
@@ -350,24 +350,24 @@ module TCOD
 
   class Dice < MethodStruct
     layout(
-       :nb_rolls, :int,
-       :nb_faces, :int,
-       :multiplier, :float,
-       :addsub, :float
+      :nb_rolls, :int,
+      :nb_faces, :int,
+      :multiplier, :float,
+      :addsub, :float
     )
   end
 
   class TCODValueT < MethodUnion
     layout(
-           :b, :bool,
-           :c, :char,
-           :i, :int32,
-           :f, :float,
-           :s, :pointer,
-           :col, Color,
-           :dice, Dice,
-           :list, TCOD_list_t,
-           :custom, :pointer
+     :b, :bool,
+     :c, :char,
+     :i, :int32,
+     :f, :float,
+     :s, :pointer,
+     :col, Color,
+     :dice, Dice,
+     :list, TCOD_list_t,
+     :custom, :pointer
     )
     def s=(str)
       @s = FFI::MemoryPointer.from_string(str)
@@ -380,11 +380,11 @@ module TCOD
 
   class TCODStructIntT < MethodStruct
     layout(
-           :name, :pointer,
-           :flags, TCOD_list_t,
-           :props, TCOD_list_t,
-           :lists, TCOD_list_t,
-           :structs, TCOD_list_t
+      :name, :pointer,
+      :flags, TCOD_list_t,
+      :props, TCOD_list_t,
+      :lists, TCOD_list_t,
+      :structs, TCOD_list_t
     )
     def name=(str)
       @name = FFI::MemoryPointer.from_string(str)
@@ -398,20 +398,20 @@ module TCOD
   callback(:TCOD_parser_custom_t, [ :pointer, :pointer, :pointer, :string ], TCODValueT.val)
   class TCODParserIntT < MethodStruct
     layout(
-           :structs, TCOD_list_t,
-           :customs, [:TCOD_parser_custom_t, 16],
-           :fatal, :bool,
-           :props, TCOD_list_t
+      :structs, TCOD_list_t,
+      :customs, [:TCOD_parser_custom_t, 16],
+      :fatal, :bool,
+      :props, TCOD_list_t
     )
   end
 
   class TCODParserListenerT < MethodStruct
     layout(
-           :new_struct, callback([ :pointer, :string ], :bool),
-           :new_flag, callback([ :string ], :bool),
-           :new_property, callback([ :string, :int, TCODValueT ], :bool),
-           :end_struct, callback([ :pointer, :string ], :bool),
-           :error, callback([ :string ], :void)
+      :new_struct, callback([ :pointer, :string ], :bool),
+      :new_flag, callback([ :string ], :bool),
+      :new_property, callback([ :string, :int, TCODValueT ], :bool),
+      :end_struct, callback([ :pointer, :string ], :bool),
+      :error, callback([ :string ], :void)
     )
   end
 
