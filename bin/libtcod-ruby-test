@@ -59,13 +59,13 @@ class Rect
     @x2 = x + w
     @y2 = y + h
   end
- 
+
   def center
     center_x = (@x1 + @x2) / 2
     center_y = (@y1 + @y2) / 2
     [center_x, center_y]
   end
- 
+
   def intersect (other)
     #returns true if this rectangle intersects with another one
     return (@x1 <= other.x2 and @x2 >= other.x1 and
@@ -84,7 +84,7 @@ class Obj
     @char = char
     @color = color
   end
- 
+
   def move (dx, dy)
     #move by the given amount, if the destination.equal? not blocked
     if not $map[@x + dx][@y + dy].blocked
@@ -92,7 +92,7 @@ class Obj
       @y += dy
     end
   end
- 
+
   def draw
     #only show if it's visible to the $player
     if TCOD.map_is_in_fov($fov_map, @x, @y)
@@ -101,7 +101,7 @@ class Obj
       TCOD.console_put_char($con, @x, @y, @char.ord, TCOD::BKGND_NONE)
     end
   end
- 
+
   def clear
     #erase the character that represents this object
     TCOD.console_put_char($con, @x, @y, ' '.ord, TCOD::BKGND_NONE)
@@ -295,7 +295,7 @@ end
 
 #note that we must specify the number of tiles on the font, which was enlarged a bit
 TCOD.console_set_custom_font(File.join(File.dirname(__FILE__), 'oryx_tiles.png'), TCOD::FONT_TYPE_GREYSCALE | TCOD::FONT_LAYOUT_TCOD, 32, 12)
-TCOD.console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, 'python/TCOD tutorial', false, TCOD::RENDERER_SDL)
+TCOD.console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, 'ruby/TCOD tutorial', false, TCOD::RENDERER_SDL)
 TCOD.sys_set_fps(LIMIT_FPS)
 $con = TCOD.console_new(SCREEN_WIDTH, SCREEN_HEIGHT)
 
@@ -327,12 +327,12 @@ $fov_recompute = true
 trap('SIGINT') { exit! }
 
 until TCOD.console_is_window_closed()
- 
+
  #render the screen
  render_all()
- 
+
  TCOD.console_flush()
- 
+
  #erase all objects at their old locations, before they move
  $objects.each do |object|
    object.clear()
