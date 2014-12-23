@@ -56,6 +56,18 @@ module TCOD
     def to_s
       "<Color #{self[:r]}, #{self[:g]}, #{self[:b]}>"
     end
+
+    def encode_with coder
+      coder['r'] = self[:r]
+      coder['g'] = self[:g]
+      coder['b'] = self[:b]
+    end
+    
+    def init_with coder
+      self[:r] = coder['r']
+      self[:g] = coder['g']
+      self[:b] = coder['b']
+    end
   end
 
   tcod_function :TCOD_color_RGB, [ :uchar, :uchar, :uchar ], Color.val
