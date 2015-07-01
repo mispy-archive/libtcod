@@ -3,28 +3,21 @@ module TCOD
     attr_accessor :width, :height, :ptr
 
     def self.root
-      @root ||= TCOD::Console.new(0, 0, true)
+      @instance = new RootConsole
     end
 
-    def initialize(w, h, root=false)
-      if root
-        @ptr = nil
-      else
-        @width = w
-        @height = h
-        @ptr = TCOD.console_new(w, h)
-      end
+    def initialize(width, height)
+      @width = w
+      @height = h
+      @ptr = TCOD.console_new(w, h)
 
       ObjectSpace.define_finalizer(self, self.class.finalize(ptr))
     end
 
-    def init_root(width, height, title, fullscreen=false, renderer=RENDERER_SDL)
-      TCOD.console_init_root(width, height, title, fullscreen, renderer)
-      Console.root.width = width
-      Console.root.height = height
+    def root?
+      false
     end
 
-    def set_window_title(title); TCOD.console_set_window_title(title); end
     def set_fullscreen(bool); TCOD.console_set_fullscreen(bool); end
     def is_fullscreen?; TCOD.console_is_fullscreen; end
     def window_closed?; TCOD.console_is_window_closed; end
