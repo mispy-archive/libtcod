@@ -35,37 +35,6 @@ module TCOD
     attach_function(sym[5..-1].to_sym, sym, *args)
   end
 
-  ### Color module
-  class Color < FFI::Struct
-    layout :r, :uchar,
-           :g, :uchar,
-           :b, :uchar
-
-    def self.rgb(r,g,b)
-      TCOD.color_RGB(r,g,b)
-    end
-
-    def self.hsv(h,s,v)
-      TCOD.color_HSV(h,s,v)
-    end
-
-    def ==(col)
-      TCOD.color_equals(self, col)
-    end
-
-    def *(col_or_float)
-      if col_or_float.is_a? Color
-        TCOD.color_multiply(self, col_or_float)
-      else
-        TCOD.color_multiply_scalar(self, col_or_float)
-      end
-    end
-
-    def to_s
-      "<Color #{self[:r]}, #{self[:g]}, #{self[:b]}>"
-    end
-  end
-
   tcod_function :TCOD_color_RGB, [ :uchar, :uchar, :uchar ], Color.val
   tcod_function :TCOD_color_HSV, [ :float, :float, :float ], Color.val
   tcod_function :TCOD_color_equals, [ Color.val, Color.val ], :bool
