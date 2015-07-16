@@ -3,13 +3,15 @@ APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 module TCOD
   extend FFI::Library
 
-  libname = 'libtcod'
-  ext = RUBY_PLATFORM.include?('darwin') ? '.dylib' : '.so'
+  LIB_ROOT = File.expand_path('../../../', __FILE__)
+
+  library_name = 'libtcod'
+  extension = RUBY_PLATFORM.include?('darwin') ? '.dylib' : '.so'
 
   case RUBY_PLATFORM
   when /mingw32/
-    libname = 'libtcod-mingw'
-    ext = '-mingw.dll'
+    library_name << '-mingw'
+    extension = '.dll'
     platform = 'i686'
   when /powerpc/
     platform = 'powerpc'
@@ -19,43 +21,18 @@ module TCOD
     platform = 'i686'
   end
 
-  libpath = File.join(APP_ROOT, 'clib', platform, "libtcod#{ext}")
-  ffi_lib [libname, libpath]
+  path = File.join(LIB_ROOT,
+                   'ext/libtcod',
+                   platform,
+                   library_name + extension)
+
+  # This fixes an ffi path issue that prevents ffi to find things on Windows.
+  path.gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
+  ffi_lib [library_name, path]
 
   # Remove redundant namespacing
   def self.tcod_function(sym, *args)
     attach_function(sym[5..-1].to_sym, sym, *args)
-  end
-
-  ### Color module
-  class Color < FFI::Struct
-    layout :r, :uchar,
-           :g, :uchar,
-           :b, :uchar
-
-    def self.rgb(r,g,b)
-      TCOD.color_RGB(r,g,b)
-    end
-
-    def self.hsv(h,s,v)
-      TCOD.color_HSV(h,s,v)
-     end
-
-    def ==(col)
-      TCOD.color_equals(self, col)
-    end
-
-    def *(col_or_float)
-      if col_or_float.is_a? Color
-        TCOD.color_multiply(self, col_or_float)
-      else
-        TCOD.color_multiply_scalar(self, col_or_float)
-      end
-    end
-
-    def to_s
-      "<Color #{self[:r]}, #{self[:g]}, #{self[:b]}>"
-    end
   end
 
   tcod_function :TCOD_color_RGB, [ :uchar, :uchar, :uchar ], Color.val
